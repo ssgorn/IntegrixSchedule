@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrixSchedule", "IntegrixSchedule\IntegrixSchedule.csproj", "{B0BBA6E6-403F-44AA-B201-7A8825488CB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrixScheduleTests", "IntegrixScheduleTests\IntegrixScheduleTests.csproj", "{BC1BF875-3958-4397-9FAB-74598B7E470A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B0BBA6E6-403F-44AA-B201-7A8825488CB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0BBA6E6-403F-44AA-B201-7A8825488CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0BBA6E6-403F-44AA-B201-7A8825488CB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0BBA6E6-403F-44AA-B201-7A8825488CB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC1BF875-3958-4397-9FAB-74598B7E470A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC1BF875-3958-4397-9FAB-74598B7E470A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC1BF875-3958-4397-9FAB-74598B7E470A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC1BF875-3958-4397-9FAB-74598B7E470A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
