@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using IntegrixSchedule.BisnessObjects;
@@ -28,7 +29,6 @@ namespace IntegrixSchedule.ViewModel
 			AddScheduleCommad = new DelegateCommand(AddScheduleAction);
 			DeleteScheduleCommad = new DelegateCommand(DeleteScheduleAction);
 			SaveScheduleCommad = new DelegateCommand(SaveScheduleAction);
-			RowEditEndingCommand = new DelegateCommand(SaveScheduleAction);
 		}
 
 		public bool ShowDialog()
@@ -76,6 +76,11 @@ namespace IntegrixSchedule.ViewModel
 			get { return _selectedTemplate; }
 			set
 			{
+				if (SelectedTemplate != null
+					&& SelectedTemplate.State != States.Unchanged)
+				{
+					SaveScheduleAction(null);
+				}
 				_selectedTemplate = value;
 				OnPropertyChanged("SelectedTemplate");
 				OnPropertyChanged("TemplatesList");
@@ -128,10 +133,29 @@ namespace IntegrixSchedule.ViewModel
 
 		protected void SaveScheduleAction(object sender)
 		{
-			foreach (var templ in _templatesList)
+			try
 			{
-				DBManager.Instance.SaveSelectedTemplate(templ);
+				if (SelectedTemplate != null)
+				{
+					if (SelectedTemplate.IsActual)
+					{
+						foreach (var source in _templatesList.Where(x => x.Id != SelectedTemplate.Id && x.IsActual))
+						{
+							source.IsActual = false;
+						}
+					}
+
+					foreach (var templ in _templatesList.OrderBy(x => x.IsActual))
+					{
+						DBManager.Instance.SaveSelectedTemplate(templ);
+					}
+				}
 			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+			_templatesList = null;
 			OnPropertyChanged("SelectedTemplate");
 			OnPropertyChanged("TemplatesList");
 		}

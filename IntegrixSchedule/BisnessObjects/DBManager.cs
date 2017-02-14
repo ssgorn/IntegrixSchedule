@@ -86,6 +86,7 @@ namespace IntegrixSchedule.BisnessObjects
 			{
 				DbContext.ScheduleHeaders.Add(hed);
 				DbContext.SaveChanges();
+				hed.State = States.Unchanged;
 			}
 		}
 
@@ -97,18 +98,31 @@ namespace IntegrixSchedule.BisnessObjects
 					DbContext.ScheduleDetails.Add(det);
 			}
 			DbContext.SaveChanges();
+			foreach (var det in dets)
+			{
+				det.State = States.Unchanged;
+			}
 		}
 
 		public ScheduleTemplate GetActualScheduleTemplate(Guid idOrganization)
 		{
-			return DbContext.SceduleTemplates.FirstOrDefault(x => x.IdOrganization == idOrganization && x.IsActual);
+			var temp =  DbContext.SceduleTemplates.FirstOrDefault(x => x.IdOrganization == idOrganization && x.IsActual);
+			temp.State = States.Unchanged;
+			return temp;
 		}
 
 		public ObservableCollection<ScheduleTemplate> SceduleTemplatesGet(Guid idOrganization)
 		{
-			return new ObservableCollection<ScheduleTemplate>((from a in DbContext.SceduleTemplates
+			var res = new ObservableCollection<ScheduleTemplate>((from a in DbContext.SceduleTemplates
 															 where a.IdOrganization == idOrganization
 															 select a).ToList());
+
+			foreach (var tem in res)
+			{
+				tem.State = States.Unchanged;
+			}
+
+			return res;
 		}
 
 		public ScheduleTemplate DeleteSelectedTemplate(ScheduleTemplate templ)
@@ -136,6 +150,7 @@ namespace IntegrixSchedule.BisnessObjects
 					item.Update(templ);
 
 				DbContext.SaveChanges();
+				templ.State = States.Unchanged;
 			}
 		}
 	}

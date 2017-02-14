@@ -18,30 +18,25 @@
             <Button Width="40" ToolTip="Сохранить" Command="{Binding SaveScheduleCommad}">/</Button>
             <Button Width="40" ToolTip="Удалить" Command="{Binding DeleteScheduleCommad}">-</Button>
         </StackPanel>
-        <DataGrid x:Name="dataGrid" Grid.Row ="1" ItemsSource="{Binding TemplatesList}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedTemplate}"
+        <DataGrid x:Name="dataGrid" Grid.Row ="1" ItemsSource="{Binding TemplatesList}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedTemplate, Mode= OneWayToSource}"
                   CurrentCell="{Binding CellInfo, Mode=OneWayToSource}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Name}" Header="Описание"/>
-                <DataGridCheckBoxColumn Binding="{Binding IsActual}" Header="Актуально"/>
-                <DataGridTextColumn Binding="{Binding TimeStart, StringFormat='HH:mm'}" Header="Время начала"/>
-                <DataGridTextColumn Binding="{Binding TimeEnd, StringFormat='HH:mm'}" Header="Время окончания"/>
-                <DataGridTextColumn Binding="{Binding RecipietTime}" Header="Время приема"/>
-                <DataGridTextColumn Binding="{Binding BreakeStartTime, StringFormat='HH:mm'}" Header="Время начала перерыва"/>
-                <DataGridTextColumn Binding="{Binding BreakeEndTime, StringFormat='HH:mm'}" Header="Время окончания перерыва"/>
+                <DataGridTextColumn Binding="{Binding Name, Mode=TwoWay}" Header="Описание"/>
+                <DataGridCheckBoxColumn Binding="{Binding IsActual, Mode=TwoWay}" Header="Актуально"/>
+                <DataGridTextColumn Binding="{Binding TimeStart, Mode=TwoWay, StringFormat='HH:mm'}" Header="Время начала"/>
+                <DataGridTextColumn Binding="{Binding TimeEnd, Mode=TwoWay, StringFormat='HH:mm'}" Header="Время окончания"/>
+                <DataGridTextColumn Binding="{Binding RecipietTime, Mode=TwoWay}" Header="Время приема"/>
+                <DataGridTextColumn Binding="{Binding BreakeStartTime, Mode=TwoWay, StringFormat='HH:mm'}" Header="Время начала перерыва"/>
+                <DataGridTextColumn Binding="{Binding BreakeEndTime, Mode=TwoWay, StringFormat='HH:mm'}" Header="Время окончания перерыва"/>
 
-                <DataGridCheckBoxColumn Binding="{Binding IsWork1}" Header="Понедельник"/>
-                <DataGridCheckBoxColumn Binding="{Binding IsWork2}" Header="Вторник"/>
-                <DataGridCheckBoxColumn Binding="{Binding IsWork3}" Header="Среда"/>
-                <DataGridCheckBoxColumn Binding="{Binding IsWork4}" Header="Четверг"/>
-                <DataGridCheckBoxColumn Binding="{Binding IsWork5}" Header="Пятница"/>
-                <DataGridCheckBoxColumn Binding="{Binding IsWork6}" Header="Суббота"/>
-                <DataGridCheckBoxColumn Binding="{Binding IsWork7}" Header="Воскресенье"/>
+                <DataGridCheckBoxColumn Binding="{Binding IsWork1, Mode=TwoWay}" Header="Понедельник"/>
+                <DataGridCheckBoxColumn Binding="{Binding IsWork2, Mode=TwoWay}" Header="Вторник"/>
+                <DataGridCheckBoxColumn Binding="{Binding IsWork3, Mode=TwoWay}" Header="Среда"/>
+                <DataGridCheckBoxColumn Binding="{Binding IsWork4, Mode=TwoWay}" Header="Четверг"/>
+                <DataGridCheckBoxColumn Binding="{Binding IsWork5, Mode=TwoWay}" Header="Пятница"/>
+                <DataGridCheckBoxColumn Binding="{Binding IsWork6, Mode=TwoWay}" Header="Суббота"/>
+                <DataGridCheckBoxColumn Binding="{Binding IsWork7, Mode=TwoWay}" Header="Воскресенье"/>
             </DataGrid.Columns>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="RowEditEnding">
-                    <i:InvokeCommandAction Command="{Binding RowEditEndingCommand}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
         </DataGrid>
 
     </Grid>

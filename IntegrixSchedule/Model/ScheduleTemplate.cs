@@ -15,6 +15,7 @@ namespace IntegrixSchedule.Model
 		/// <summary>
 		/// Ключ организации
 		/// </summary>
+		//[Index("IX_IsActualIdOrganozation", 1, IsUnique = true)]
 		[Index]
 		public Guid IdOrganization { get; set; }
 
@@ -23,11 +24,22 @@ namespace IntegrixSchedule.Model
 		/// </summary>
 		public string Name { get; set; }
 
+		private bool _isActual;
 		/// <summary>
 		/// Признак актуальности
 		/// </summary>
+		//[Index("IX_IsActualIdOrganozation", 2, IsUnique = true)]
 		[Index]
-		public bool IsActual { get; set; }
+		public bool IsActual
+		{
+			get { return _isActual; }
+			set
+			{
+				_isActual = value;
+				if (State == States.Unchanged)
+					State = States.Modified;
+			}
+		}
 
 		/// <summary>
 		/// Время начала работы
